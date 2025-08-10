@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: bsnl-complaint-portal
+    env: static
+    buildCommand: echo "Building static site..." && ls -la
+    staticPublishPath: ./
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        headers:
+          X-Frame-Options: DENY
+          X-Content-Type-Options: nosniff
+          Referrer-Policy: strict-origin-when-cross-origin
+          Permissions-Policy: geolocation=(), microphone=(), camera=()
+    envVars:
+      - key: NODE_ENV
+        value: production
