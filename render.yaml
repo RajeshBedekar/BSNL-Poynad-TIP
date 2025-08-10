@@ -7,18 +7,7 @@ services:
     routes:
       - type: rewrite
         source: /*
-        destination: /index.html
-    headers:
-      - path: /*
-        headers:
-          - name: X-Frame-Options
-            value: DENY
-          - name: X-Content-Type-Options
-            value: nosniff
-          - name: Referrer-Policy
-            value: strict-origin-when-cross-origin
-          - name: Permissions-Policy
-            value: "geolocation=(), microphone=(), camera=()"
+        destination: /home.html
     envVars:
       - key: NODE_ENV
         value: production
