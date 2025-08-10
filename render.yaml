@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bsnl-complaint-portal
+    name: bsnl-poynad-tip
     env: static
     buildCommand: echo "Building static site..." && ls -la
     staticPublishPath: ./
