@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="#">Analytics</a></li>
+      <li><a href="#">OLT</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <span class="menu-btn" onclick="toggleSidebar()">☰</span>
+      <h1>Welcome to the Dashboard</h1>
+    </div>
+    <div class="content">
+      <div class="card">📊 Analytics</div>
+      <div class="card">👥 Users</div>
+      <div class="card">⚙️ Settings</div>
+      <div class="card">📁 Files</div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

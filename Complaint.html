@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Raise Technical Complaint — Mockup</title>
+  <style>
+    :root {
+      --bsnl-blue: #0056a6;
+      --accent: #f0f8ff;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      background: #f3f6fb;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, var(--bsnl-blue), #0078d7);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .sub {
+      font-size: 0.85rem;
+      opacity: .95
+    }
+
+    /* Page container */
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 16px;
+    }
+
+    /* Browser warning bar */
+    .warn {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 14px;
+      border-radius: 8px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .warn strong {
+      display: block;
+      color: #92400e
+    }
+
+    .warn p {
+      margin: 0;
+      color: #92400e;
+      font-size: 0.95rem
+    }
+
+    /* Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 18px;
+    }
+
+    @media (max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card */
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(13, 17, 23, 0.06);
+    }
+
+    h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.15rem
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 14px
+    }
+
+    /* Form elements */
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 10px 0 6px 0;
+      font-size: 0.92rem
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e6e9ef;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: white;
+    }
+
+    select {
+      appearance: auto
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row .col {
+      flex: 1
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      color: white;
+      background: var(--bsnl-blue);
+    }
+
+    .btn.secondary {
+      background: #6b7280
+    }
+
+    .btn.danger {
+      background: #dc2626
+    }
+
+    .btn.whatsapp {
+      background: #25D366;
+      color: #06321a
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap
+    }
+
+    /* Right column info */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .info-item {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #eef2ff
+    }
+
+    .info-item h4 {
+      margin: 0 0 6px 0
+    }
+
+    .info-item p {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    /* small text */
+    .small {
+      font-size: 0.85rem;
+      color: var(--muted)
+    }
+
+    /* file input style */
+    .file-input {
+      border: 1px dashed #e6e9ef;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      color: var(--muted)
+    }
+
+    /* toast */
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #111827;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.3);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .28s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto
+    }
+
+    /* footer */
+    footer {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 10px 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="download.jpeg">
+      <div>
+        <div class="brand">BSNL POYNAD TIP </div>
+        <div class="sub">Raise Technical Complaint</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- optional browser message -->
+    <div class="warn card">
+      <div style="font-size:20px">⚠️</div>
+      <div>
+        <strong>Browser compatibility notice</strong>
+        <p>This page is best viewed in modern browsers (Chrome, Edge, Firefox). If you see errors, please upgrade your
+          browser or enable compatibility view.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- left: form -->
+      <div class="card">
+        <h2>Raise Technical Complaint</h2>
+        <p class="lead">Select service, provide details and submit. An executive will contact you.</p>
+
+        <form id="complaintForm" novalidate>
+          <label for="service">Service Type</label>
+          <select id="service" required>
+            <option value="">-- Select Service --</option>
+            <option>Landline</option>
+            <option>Broadband (BB)</option>
+            <option>Bharat Fiber (FTTH)</option>
+            <option>Wings</option>
+            <option>Enterprise</option>
+          </select>
+
+          <div class="row" style="margin-top:6px">
+            <div class="col">
+              <label for="subscriber">Subscriber No. / Customer ID</label>
+              <input id="subscriber" type="text" placeholder="e.g. 18001234567" required>
+            </div>
+            <div class="col">
+              <label for="region">Circle / Region</label>
+              <select id="region" required>
+                <option value="">Select Circle</option>
+                <option>POYNAD</option>
+                <option>SHREEGON</option>
+                <option>IPCL</option>
+                <option>WADKHAL</option>
+                <option>TADWAGLE</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="name">Full Name</label>
+          <input id="name" type="text" placeholder="Your full name" required>
+
+          <div class="row">
+            <div class="col">
+              <label for="mobile">Mobile No</label>
+              <input id="mobile" type="tel" placeholder="10-digit mobile" pattern="[0-9]{10}" required>
+            </div>
+            <div class="col">
+              <label for="email">Email (optional)</label>
+              <input id="email" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+
+          <label for="address">Address</label>
+          <input id="address" type="text" placeholder="House / Street / Landmark">
+
+          <label for="location">Google Map Location (optional)</label>
+          <input id="location" type="url" placeholder="Paste Google Maps share/embed link">
+
+          <label for="complaint">Complaint Details</label>
+          <textarea id="complaint"
+            placeholder="Describe the problem (e.g., no dial tone, slow internet, frequent disconnections)"
+            required></textarea>
+          <div class="note">Please include error times, frequency and any troubleshooting you've already tried.</div>
+
+          <label style="margin-top:10px">Attachments (optional)</label>
+          <div class="file-input">
+            <input id="file" type="file" accept="image/*,application/pdf"
+              style="opacity:0;position:absolute;left:-9999px" />
+            <div style="position:relative">
+              <button type="button" class="btn secondary" id="chooseFileBtn">Choose file</button>
+              <span id="fileName" class="small" style="margin-left:10px">No file chosen</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Submit Complaint</button>
+            <button class="btn secondary" type="button" id="resetBtn">Reset</button>
+            <button class="btn whatsapp" type="button" id="whatsappBtn">Send via WhatsApp</button>
+            <a href="home.html" class="btn">🏠 Home</a>
+
+          </div>
+        </form>
+      </div>
+
+      <!-- right: info / steps -->
+      <aside>
+        <div class="info-list">
+          <div class="info-item card">
+            <h4>How it works</h4>
+            <p class="small">1. Fill the complaint form → 2. You receive an acknowledgment ID → 3. Technician assigned &
+              status updates via SMS.</p>
+          </div>
+
+          <div class="info-item card">
+            <h4>Important</h4>
+            <p class="small">Provide correct subscriber number and circle to avoid delays. Attach screenshots if
+              possible.</p>
+          </div>
+
+          <div
+            style=" margin: 20px auto; padding: 15px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            <h2 style="margin: 0 0 25px 0; color: #333; font-size: 24px; font-weight: 600; text-align: center;">Track
+              Complaint</h2>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+              <input type="text" id="searchInput" placeholder="Enter Complaint ID or Mobile No"
+                style="width: 100%; padding: 14px 16px; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 16px; background: #f8f9fa; transition: all 0.3s ease; box-sizing: border-box; outline: none;"
+                onfocus="this.style.borderColor='#007bff'; this.style.background='white'"
+                onblur="this.style.borderColor='#e1e5e9'; this.style.background='#f8f9fa'">
+              <button onclick="searchComplaint()"
+                style="width: 100%; margin-top: 15px; padding: 14px 20px; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;"
+                onmouseover="this.style.background='#0056b3'" onmouseout="this.style.background='#007bff'">
+                Search
+              </button>
+            </div>
+
+            <div id="resultArea" class="empty-state"
+              style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 30px 20px; text-align: center; color: #6c757d; font-size: 14px; min-height: 80px; display: flex; align-items: center; justify-content: center;">
+              Enter your Complaint ID or Mobile Number to check status.
+            </div>
+          </div><!-- Toast Notification -->
+          <div id="toast"
+            style="position: fixed; top: 20px; right: 20px; background: #333; color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px; z-index: 1000; transform: translateX(400px); opacity: 0; transition: all 0.3s ease; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+          </div>
+
+           
+
+          <style>
+            .show {
+              transform: translateX(0) !important;
+              opacity: 1 !important;
+            }
+
+            .status-timeline {
+              text-align: left;
+              margin-bottom: 20px;
+            }
+
+            .timeline-item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 12px 16px;
+              margin-bottom: 8px;
+              background: #e8f4fd;
+              border-left: 4px solid #007bff;
+              border-radius: 0 8px 8px 0;
+              font-weight: 500;
+              color: #333;
+            }
+
+            .timeline-item span {
+              font-size: 12px;
+              color: #666;
+              font-weight: normal;
+            }
+
+            .details {
+              background: #f8f9fa;
+              padding: 20px;
+              border-radius: 8px;
+              margin-bottom: 20px;
+              text-align: left;
+              line-height: 1.8;
+              color: #333;
+            }
+
+            .details strong {
+              color: #007bff;
+            }
+
+            .actions {
+              display: flex;
+              gap: 10px;
+              margin-bottom: 20px;
+            }
+
+            .actions a {
+              flex: 1;
+              padding: 12px 16px;
+              text-decoration: none;
+              border-radius: 8px;
+              text-align: center;
+              font-weight: 500;
+              transition: all 0.3s ease;
+            }
+
+            .call {
+              background: #28a745;
+              color: white;
+            }
+
+            .call:hover {
+              background: #218838;
+              transform: translateY(-1px);
+            }
+
+            .whatsapp {
+              background: #25d366;
+              color: white;
+            }
+
+            .whatsapp:hover {
+              background: #1da851;
+              transform: translateY(-1px);
+            }
+
+            .toolbar {
+              display: flex;
+              gap: 10px;
+            }
+
+            .toolbar button {
+              flex: 1;
+              padding: 12px 16px;
+              background: #6c757d;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              font-size: 14px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.3s ease;
+            }
+
+            .toolbar button:hover {
+              background: #5a6268;
+              transform: translateY(-1px);
+            }
+
+            .empty-state {
+              color: #6c757d;
+              font-style: italic;
+            }
+          </style>
+
+          <script>
+            function showToast(message) {
+              const toast = document.getElementById("toast");
+              toast.textContent = message;
+              toast.classList.add("show");
+              setTimeout(() => toast.classList.remove("show"), 3000);
+            }
+
+            function searchComplaint() {
+              const input = document.getElementById("searchInput").value.trim();
+              const resultArea = document.getElementById("resultArea");
+
+              if (!input) {
+                showToast("Please enter Complaint ID or Mobile Number");
+                return;
+              }
+
+              // Show loading state
+              resultArea.innerHTML = `
+        <div style="color: #007bff; font-weight: 500;">
+            🔍 Searching for complaint...
+        </div>
+    `;
+
+              // Simulate API call delay
+              setTimeout(() => {
+                if (input === "12345" || input === "9876543210") {
+                  resultArea.innerHTML = `
+                <div class="status-timeline">
+                    <div class="timeline-item">
+                        ✅ Complaint Registered <span>2025-08-10 10:15 AM</span>
+                    </div>
+                    <div class="timeline-item">
+                        👷 Assigned to Engineer <span>2025-08-10 11:00 AM</span>
+                    </div>
+                    <div class="timeline-item">
+                        🚗 Engineer on the Way <span>2025-08-10 01:30 PM</span>
+                    </div>
+                </div>
+                
+                <div class="details">
+                    <strong>Complaint ID:</strong> ${input}<br>
+                    <strong>Issue Type:</strong> Broadband Connection<br>
+                    <strong>Description:</strong> Internet not working<br>
+                    <strong>Engineer:</strong> Rajesh Kumar<br>
+                    <strong>Contact:</strong> +91 98765 43210<br>
+                    <strong>Priority:</strong> High
+                </div>
+                
+                <div class="actions">
+                    <a href="tel:+919876543210" class="call">📞 Call Engineer</a>
+                    <a href="https://wa.me/919876543210?text=Hi, I have complaint ID ${input}" target="_blank" class="whatsapp">💬 WhatsApp</a>
+                </div>
+                
+                <div class="toolbar">
+                    <button onclick="refreshStatus()">🔄 Refresh</button>
+                    <button onclick="downloadPDF()">📄 Download PDF</button>
+                </div>
+            `;
+                  showToast("Complaint details loaded successfully");
+                } else {
+                  resultArea.innerHTML = `
+                <div class="empty-state">
+                    ❌ No complaint found for "${input}"<br>
+                    <small>Please check your Complaint ID or Mobile Number</small>
+                </div>
+            `;
+                  showToast("No complaint found");
+                }
+              }, 1000);
+            }
+
+            function refreshStatus() {
+              showToast("✅ Status refreshed successfully");
+              // Add loading animation to timeline items
+              const timelineItems = document.querySelectorAll('.timeline-item');
+              timelineItems.forEach(item => {
+                item.style.opacity = '0.5';
+                setTimeout(() => item.style.opacity = '1', 500);
+              });
+            }
+
+            function downloadPDF() {
+              showToast("📄 PDF download started");
+              // Simulate PDF generation
+              setTimeout(() => {
+                showToast("📄 PDF ready for download");
+              }, 2000);
+            }
+
+            // Add keyboard support for Enter key
+            document.addEventListener('DOMContentLoaded', function () {
+              const searchInput = document.getElementById('searchInput');
+              if (searchInput) {
+                searchInput.addEventListener('keypress', function (e) {
+                  if (e.key === 'Enter') {
+                    searchComplaint();
+                  }
+                });
+              }
+            });
+          </script>
+
+        </div>
+    </div>
+    </aside>
+
+  </div>
+  </div>
+
+  <footer>© Mockup — BSNL SelfCare style • This is a design mockup only.</footer>
+
+  <!-- toast -->
+  <div id="toast" class="toast">Complaint submitted successfully (mock). Reference: <strong id="refid">-</strong></div>
+
+  <script >
+    // simple UX: file chooser
+    const fileInput = document.getElementById('file');
+    const chooseBtn = document.getElementById('chooseFileBtn');
+    const fileName = document.getElementById('fileName');
+
+    chooseBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      fileName.textContent = fileInput.files.length ? fileInput.files[0].name : 'No file chosen';
+    });
+
+    // Reset button
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.getElementById('complaintForm').reset();
+      fileName.textContent = 'No file chosen';
+    });
+
+    // WhatsApp button: format message and open chat to admin number
+    document.getElementById('whatsappBtn').addEventListener('click', () => {
+      const admin = prompt('Send WhatsApp to admin number (enter with country code, no +). Example: 919876543210', '919876543210');
+      if (!admin) return;
+      // collect some fields
+      const name = encodeURIComponent(document.getElementById('name').value || '-');
+      const mobile = encodeURIComponent(document.getElementById('mobile').value || '-');
+      const service = encodeURIComponent(document.getElementById('service').value || '-');
+      const subscriber = encodeURIComponent(document.getElementById('subscriber').value || '-');
+      const complaint = encodeURIComponent(document.getElementById('complaint').value || '-');
+
+      const text = `New Complaint\nService: ${service}%0ASubscriber: ${subscriber}%0AName: ${name}%0AMobile: ${mobile}%0AComplaint: ${complaint}`;
+      const url = `https://wa.me/${admin}?text=${text}`;
+      window.open(url, '_blank');
+    });
+
+    // Form submit (mock)
+    document.getElementById('complaintForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      // basic validation
+      const required = [
+        'service', 'subscriber', 'name', 'mobile', 'complaint'
+      ];
+      for (const id of required) {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) {
+          el && el.focus();
+          alert('Please fill all required fields.');
+          return;
+        }
+      }
+
+      // generate mock reference id
+      const ref = 'TCK' + Math.random().toString(36).substr(2, 8).toUpperCase();
+      document.getElementById('refid').textContent = ref;
+
+      // show toast
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 6000);
+
+      // in a real implementation you would POST form data to server here
+      // simulate clearing
+      setTimeout(() => {
+        // keep form but show ref; optionally reset:
+        // document.getElementById('complaintForm').reset();
+      }, 800);
+    });
+  </script>
+</body>
+
+</html>

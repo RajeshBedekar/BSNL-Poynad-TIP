@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Color Entry Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body{font-family:sans-serif;background:#f6f8fb;margin:0;padding:20px}
+.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+h2{margin-top:0}
+form{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:10px}
+input{padding:6px;border:1px solid #ccc;border-radius:4px}
+button{padding:6px 10px;border:none;border-radius:4px;cursor:pointer}
+.btn{background:#2563eb;color:#fff}
+.btn-secondary{background:#111827;color:#fff}
+.btn-danger{background:#dc2626;color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:8px;border-bottom:1px solid #ddd;text-align:left}
+.actions button{margin-right:4px}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Color Entry Form</h2>
+
+<form id="entryForm" onsubmit="return false;">
+  <input id="name" placeholder="Name" required />
+  <input id="blu" type="number" placeholder="Blu" />
+  <input id="orenj" type="number" placeholder="Orenj" />
+  <input id="grin" type="number" placeholder="Grin" />
+  <input id="braun" type="number" placeholder="Braun" />
+  <input id="wait" type="number" placeholder="Wait" />
+  <input id="slet" type="number" placeholder="Slet" />
+</form>
+<div>
+  <button id="addBtn" class="btn">Add</button>
+  <button id="updateBtn" class="btn-secondary" style="display:none">Update</button>
+  <button id="clearBtn">Clear</button>
+  <input type="file" id="csvFile" accept=".csv" />
+  <button id="importBtn">Import CSV</button>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th>#</th><th>Name</th><th>Blu</th><th>Orenj</th><th>Grin</th>
+  <th>Braun</th><th>Wait</th><th>Slet</th><th>Actions</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<script>
+(() => {
+const STORAGE_KEY = "color_rows_v1";
+let rows = [];
+let editIndex = -1;
+
+// Elements
+const nameEl = document.getElementById("name");
+const bluEl = document.getElementById("blu");
+const orenjEl = document.getElementById("orenj");
+const grinEl = document.getElementById("grin");
+const braunEl = document.getElementById("braun");
+const waitEl = document.getElementById("wait");
+const sletEl = document.getElementById("slet");
+const tableBody = document.getElementById("tableBody");
+const addBtn = document.getElementById("addBtn");
+const updateBtn = document.getElementById("updateBtn");
+const clearBtn = document.getElementById("clearBtn");
+const importBtn = document.getElementById("importBtn");
+const csvFile = document.getElementById("csvFile");
+
+// Save/load localStorage
+function saveLocal(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(rows)); }
+function loadLocal(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw) rows = JSON.parse(raw) || [];
+  render();
+}
+
+// Read form
+function readForm(){
+  if(!nameEl.value.trim()){ alert("Name required"); return null; }
+  return {
+    name: nameEl.value.trim(),
+    blu: bluEl.value || 0,
+    orenj: orenjEl.value || 0,
+    grin: grinEl.value || 0,
+    braun: braunEl.value || 0,
+    wait: waitEl.value || 0,
+    slet: sletEl.value || 0
+  };
+}
+
+// Clear form
+function clearForm(){
+  nameEl.value = bluEl.value = orenjEl.value = grinEl.value =
+  braunEl.value = waitEl.value = sletEl.value = "";
+  addBtn.style.display = "";
+  updateBtn.style.display = "none";
+  editIndex = -1;
+}
+
+// Render table
+function render(){
+  tableBody.innerHTML = "";
+  rows.forEach((r,i)=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${i+1}</td>
+      <td>${r.name}</td>
+      <td>${r.blu}</td>
+      <td>${r.orenj}</td>
+      <td>${r.grin}</td>
+      <td>${r.braun}</td>
+      <td>${r.wait}</td>
+      <td>${r.slet}</td>
+      <td class="actions">
+        <button class="btn-secondary" data-action="edit" data-i="${i}">Edit</button>
+        <button class="btn-danger" data-action="del" data-i="${i}">Del</button>
+      </td>`;
+    tableBody.appendChild(tr);
+  });
+  saveLocal();
+}
+
+// Add row
+function addRow(){
+  const r = readForm();
+  if(!r) return;
+  rows.push(r);
+  render();
+  clearForm();
+}
+
+// Start edit
+function startEdit(i){
+  const r = rows[i];
+  nameEl.value = r.name;
+  bluEl.value = r.blu;
+  orenjEl.value = r.orenj;
+  grinEl.value = r.grin;
+  braunEl.value = r.braun;
+  waitEl.value = r.wait;
+  sletEl.value = r.slet;
+  editIndex = i;
+  addBtn.style.display = "none";
+  updateBtn.style.display = "";
+}
+
+// Update row
+function updateRow(){
+  const r = readForm();
+  if(!r) return;
+  rows[editIndex] = r;
+  render();
+  clearForm();
+}
+
+// Delete row
+function deleteRow(i){
+  if(!confirm("Delete row?")) return;
+  rows.splice(i,1);
+  render();
+}
+
+// CSV import (very simple)
+function importCSV(file){
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const lines = e.target.result.split(/\r?\n/).filter(l=>l.trim()!=="");
+    lines.forEach((line,idx)=>{
+      if(idx===0 && line.toLowerCase().includes("name")) return; // skip header
+      const [name,blu,orenj,grin,braun,wait,slet] = line.split(",");
+      if(name) rows.push({name,blu,orenj,grin,braun,wait,slet});
+    });
+    render();
+    alert("Imported!");
+  };
+  reader.readAsText(file);
+}
+
+// Events
+addBtn.onclick = addRow;
+updateBtn.onclick = updateRow;
+clearBtn.onclick = clearForm;
+tableBody.onclick = e=>{
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  const i = +btn.dataset.i;
+  if(btn.dataset.action==="edit") startEdit(i);
+  if(btn.dataset.action==="del") deleteRow(i);
+};
+importBtn.onclick = ()=>{
+  if(!csvFile.files.length){ alert("Choose CSV first"); return; }
+  importCSV(csvFile.files[0]);
+};
+
+// Init
+loadLocal();
+})();
+</script>
+</body>
+</html>

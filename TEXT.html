@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Popup with New Page Link</title>
+<style>
+  .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
+  .popup-window { background:#fff; width:300px; margin:100px auto; padding:20px; border-radius:10px; text-align:center;}
+  .close-btn { position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;}
+</style>
+</head>
+<body>
+
+<button onclick="openPopup()">Open Popup</button>
+
+<div class="popup" id="popupBox">
+  <div class="popup-window">
+    <span class="close-btn" onclick="closePopup()">&times;</span>
+    <h2>Go to New Page</h2>
+    <p>Click below to open another page.</p>
+    <button onclick="window.open('newpage.html', '_blank')">Open New Page</button>
+  </div>
+</div>
+
+<script>
+function openPopup(){ document.getElementById('popupBox').style.display='block'; }
+function closePopup(){ document.getElementById('popupBox').style.display='none'; }
+window.onclick=function(e){ if(e.target===document.getElementById('popupBox')) closePopup(); }
+</script>
+
+</body>
+</html>

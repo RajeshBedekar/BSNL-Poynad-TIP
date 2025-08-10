@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OFC Location Data Entry</title>
+  <link rel="stylesheet" href="ofc.css" />
+</head>
+<body>
+
+  <div class="form-box">
+    <h2>OFC Location Data Entry</h2>
+    <form onsubmit="return handleOFCSubmit()">
+      <label for="location">Select OFC Location:</label>
+      <select id="location" required>
+        <option value="">-- Choose Location --</option>
+        <option value="OFC 1">OFC 1</option>
+        <option value="OFC 2">OFC 2</option>
+        <option value="OFC 3">OFC 3</option>
+        <option value="OFC 4">OFC 4</option>
+        <option value="OFC 5">OFC 5</option>
+        <option value="OFC 6">OFC 6</option>
+      </select>
+
+      <label for="cable-length">Cable Length (in meters):</label>
+      <input type="number" id="cable-length" min="0" required>
+
+      <label for="status">Status:</label>
+      <select id="status" required>
+        <option value="">-- Select Status --</option>
+        <option value="Active">Active</option>
+        <option value="Under Maintenance">Under Maintenance</option>
+        <option value="Disconnected">Disconnected</option>
+      </select>
+
+      <label for="remarks">Remarks:</label>
+      <textarea id="remarks" rows="3" placeholder="Optional..."></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="result-message"></p>
+  </div>
+
+  <script src="ofc.js"></script>
+</body>
+</html>
