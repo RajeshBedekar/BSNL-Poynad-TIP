@@ -283,6 +283,8 @@
       <div>
         <div class="brand">BSNL POYNAD TIP </div>
         <div class="sub">Raise Technical Complaint</div>
+         <a href="home.html" class="btn">🏠 Home</a>
+
       </div>
     </div>
   </header>
@@ -306,79 +308,9 @@
         <h2>Raise Technical Complaint</h2>
         <p class="lead">Select service, provide details and submit. An executive will contact you.</p>
 
-        <form id="complaintForm" novalidate>
-          <label for="service">Service Type</label>
-          <select id="service" required>
-            <option value="">-- Select Service --</option>
-            <option>Landline</option>
-            <option>Broadband (BB)</option>
-            <option>Bharat Fiber (FTTH)</option>
-            <option>Wings</option>
-            <option>Enterprise</option>
-          </select>
+        <script src="https://sheetdb.io/s/f/f1d5nvvqvr97y.js"></script>
+ 
 
-          <div class="row" style="margin-top:6px">
-            <div class="col">
-              <label for="subscriber">Subscriber No. / Customer ID</label>
-              <input id="subscriber" type="text" placeholder="e.g. 18001234567" required>
-            </div>
-            <div class="col">
-              <label for="region">Circle / Region</label>
-              <select id="region" required>
-                <option value="">Select Circle</option>
-                <option>POYNAD</option>
-                <option>SHREEGON</option>
-                <option>IPCL</option>
-                <option>WADKHAL</option>
-                <option>TADWAGLE</option>
-              </select>
-            </div>
-          </div>
-
-          <label for="name">Full Name</label>
-          <input id="name" type="text" placeholder="Your full name" required>
-
-          <div class="row">
-            <div class="col">
-              <label for="mobile">Mobile No</label>
-              <input id="mobile" type="tel" placeholder="10-digit mobile" pattern="[0-9]{10}" required>
-            </div>
-            <div class="col">
-              <label for="email">Email (optional)</label>
-              <input id="email" type="email" placeholder="you@example.com">
-            </div>
-          </div>
-
-          <label for="address">Address</label>
-          <input id="address" type="text" placeholder="House / Street / Landmark">
-
-          <label for="location">Google Map Location (optional)</label>
-          <input id="location" type="url" placeholder="Paste Google Maps share/embed link">
-
-          <label for="complaint">Complaint Details</label>
-          <textarea id="complaint"
-            placeholder="Describe the problem (e.g., no dial tone, slow internet, frequent disconnections)"
-            required></textarea>
-          <div class="note">Please include error times, frequency and any troubleshooting you've already tried.</div>
-
-          <label style="margin-top:10px">Attachments (optional)</label>
-          <div class="file-input">
-            <input id="file" type="file" accept="image/*,application/pdf"
-              style="opacity:0;position:absolute;left:-9999px" />
-            <div style="position:relative">
-              <button type="button" class="btn secondary" id="chooseFileBtn">Choose file</button>
-              <span id="fileName" class="small" style="margin-left:10px">No file chosen</span>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="btn" type="submit">Submit Complaint</button>
-            <button class="btn secondary" type="button" id="resetBtn">Reset</button>
-            <button class="btn whatsapp" type="button" id="whatsappBtn">Send via WhatsApp</button>
-            <a href="home.html" class="btn">🏠 Home</a>
-
-          </div>
-        </form>
       </div>
 
       <!-- right: info / steps -->
@@ -559,7 +491,7 @@
 
               // Simulate API call delay
               setTimeout(() => {
-                if (input === "12345" || input === "9876543210") {
+                if (input === "12345" || input === "7770009455") {
                   resultArea.innerHTML = `
                 <div class="status-timeline">
                     <div class="timeline-item">
@@ -583,8 +515,8 @@
                 </div>
                 
                 <div class="actions">
-                    <a href="tel:+919876543210" class="call">📞 Call Engineer</a>
-                    <a href="https://wa.me/919876543210?text=Hi, I have complaint ID ${input}" target="_blank" class="whatsapp">💬 WhatsApp</a>
+                    <a href="tel:+917770009455" class="call">📞 Call Engineer</a>
+                    <a href="https://wa.me/917770009455?text=Hi, I have complaint ID ${input}" target="_blank" class="whatsapp">💬 WhatsApp</a>
                 </div>
                 
                 <div class="toolbar">
@@ -667,7 +599,7 @@
 
     // WhatsApp button: format message and open chat to admin number
     document.getElementById('whatsappBtn').addEventListener('click', () => {
-      const admin = prompt('Send WhatsApp to admin number (enter with country code, no +). Example: 919876543210', '919876543210');
+      const admin = prompt('Send WhatsApp to admin number (enter with country code, no +). Example: 917770009455', '917770009455');
       if (!admin) return;
       // collect some fields
       const name = encodeURIComponent(document.getElementById('name').value || '-');
